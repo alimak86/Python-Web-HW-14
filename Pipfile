@@ -1,0 +1,31 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi-utils = "*"
+fastapi-mail = "*"
+fastapi-limiter = "*"
+redis = "*"
+ratelimiter = "*"
+cloudinary = "*"
+fastapi = "*"
+uvicorn = {version = "*", extras = ["standard"]}
+sqlalchemy = "*"
+alembic = "*"
+psycopg2 = "*"
+python-dotenv = "*"
+python-jose = {version = "*", extras = ["cryptography"]}
+libgravatar = "*"
+pathlib = {version = "*", extras = ["bcrypt"]}
+python-multipart = "*"
+pillow = "*"
+passlib = "*"
+bcrypt = "*"
+
+[dev-packages]
+sphinx = "==6.1.3"
+
+[requires]
+python_version = "3.11"

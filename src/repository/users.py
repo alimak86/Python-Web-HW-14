@@ -7,11 +7,12 @@ from abc import abstractmethod
 
 
 class BaseUser:
-"""
-class BaseUser is common part for all derived user manipulation classes
+  """
+  class BaseUser is common part for all derived user manipulation classes.
 
-: db : Session
-"""
+  :param db: database for the connection
+  :type db: Session
+  """
   def __init__(self, db: Session):
     self.db = db
 

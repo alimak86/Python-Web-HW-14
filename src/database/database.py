@@ -8,16 +8,21 @@ SQLALCHEMY_DATABASE_URL_FOR_WORK = settings.sqlalchemy_database_url
 
 class Connect_db:
 
-"""
-class Connec_db is responsible for the connection with the database
+  """
+  class Connect_db is responsible for the connection with the database
 
-__call__ method creates a connection
-: url : str - contains url for the connection
-: engine : create engine
-: session : Session - define current session for the connection
-"""
+  :param url: url of the database
+  :type url: str
+  :param engine: database engine
+  :type engine: sqlalchemy engine type
+  :param session: session
+  :type session: Session
+  """
 
   def __init__(self, url: str):
+    """
+    constructor
+    """
     self.url = url
     #############self.engine = create_engine(url,connect_args={"check_same_thread": False})
     self.engine = create_engine(url)
@@ -27,6 +32,7 @@ __call__ method creates a connection
                                 bind=self.engine)
 
   def __call__(self):
+    
     db = self.session()
     try:
       yield db

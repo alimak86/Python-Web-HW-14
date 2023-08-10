@@ -8,7 +8,6 @@ from fastapi_limiter import FastAPILimiter
 from src.conf.config import settings
 from fastapi.middleware.cors import CORSMiddleware
 
-
 app = FastAPI()
 
 app.include_router(contacts.router, prefix='/api')

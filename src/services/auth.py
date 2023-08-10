@@ -12,6 +12,9 @@ from src.repository import users as repository_users
 from src.conf.config import settings
 
 class Auth:
+  """
+  class Auth works with the password and tokens
+  """
   pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
   # SECRET_KEY = "secret_key"
   # ALGORITHM = "HS256"
@@ -20,8 +23,10 @@ class Auth:
   ALGORITHM = settings.algorithm
 
   oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
-
+ 
   def verify_password(self, plain_password, hashed_password):
+    """
+    """
     return self.pwd_context.verify(plain_password, hashed_password)
 
   def get_password_hash(self, password: str):
@@ -31,6 +36,8 @@ class Auth:
   async def create_access_token(self,
                                 data: dict,
                                 expires_delta: Optional[float] = None):
+    """
+    """
     to_encode = data.copy()
     if expires_delta:
       expire = datetime.utcnow() + timedelta(seconds=expires_delta)
@@ -50,6 +57,8 @@ class Auth:
   async def create_refresh_token(self,
                                  data: dict,
                                  expires_delta: Optional[float] = None):
+    """
+    """
     to_encode = data.copy()
     if expires_delta:
       expire = datetime.utcnow() + timedelta(seconds=expires_delta)
@@ -66,6 +75,8 @@ class Auth:
     return encoded_refresh_token
 
   async def decode_refresh_token(self, refresh_token: str):
+    """
+    """
     try:
       payload = jwt.decode(refresh_token,
                            self.SECRET_KEY,
@@ -82,6 +93,8 @@ class Auth:
   async def get_current_user(self,
                              token: str = Depends(oauth2_scheme),
                              db: Session = Depends(Connect_db(SQLALCHEMY_DATABASE_URL_FOR_WORK))):
+    """
+    """
     credentials_exception = HTTPException(
       status_code=status.HTTP_401_UNAUTHORIZED,
       detail="Could not validate credentials",
@@ -113,6 +126,8 @@ class Auth:
     return token
   
   async def get_email_from_token(self, token: str):
+    """
+    """
     try:
         payload = jwt.decode(token, self.SECRET_KEY, algorithms=[self.ALGORITHM])
         email = payload["sub"]

@@ -11,10 +11,6 @@ from src.services.auth import auth_service
 from fastapi_limiter.depends import RateLimiter
 
 router = APIRouter(prefix='/contacts', tags=["contacts"])
-"""
-extract all contacts
-"""
-
 
 @router.get("/", response_model=List[ResponseContactModel], description='No more than 10 requests per 5 seconds',
             dependencies=[Depends(RateLimiter(times=10, seconds=5))])
@@ -34,11 +30,6 @@ async def read_contacts(
                                          phonenumber = contact.phonenumber, 
                                          dateofbirth=contact.dateofbirth))
   return output
-
-
-"""
-find contacts with the specified first name
-"""
 
 
 @router.get("/name/{firstname}",response_model = List[ContactModel])
@@ -63,11 +54,6 @@ async def read_contact_by_name(
   return output
 
 
-#  return firstname
-"""
-find contacts with the specified second name
-"""
-
 
 @router.get("/secondname/{secondname}",response_model =List[ContactModel])
 async def read_contact_by_secondname(
@@ -91,11 +77,6 @@ async def read_contact_by_secondname(
   return output
 
 
-"""
-find contacts with the specified email
-"""
-
-
 @router.get("/email/{email}",response_model = List[ContactModel])
 async def read_contact_by_name(
   email: str,
@@ -117,11 +98,6 @@ async def read_contact_by_name(
   return output
 
 
-"""
-extract contact defined by id
-"""
-
-
 @router.get("/{contact_id}", response_model=ContactModelFullName)
 async def read_contact(
   contact_id: int,
@@ -134,11 +110,6 @@ async def read_contact(
                         detail="Contact not found")
   return ContactModelFullName(firstname = contact.firstname, 
                                secondname = contact.secondname)
-
-
-"""
-create new contact
-"""
 
 
 @router.post("/", response_model=ResponseContactModel)
@@ -155,11 +126,6 @@ async def create_contact(
                                        email = contact.email,
                                          phonenumber = contact.phonenumber, 
                                          dateofbirth=contact.dateofbirth)
-
-
-"""
-update contact info
-"""
 
 
 @router.put("/{contact_id}", response_model=ResponseContactModel)
@@ -180,11 +146,6 @@ async def update_contact(
                                        email = contact.email,
                                          phonenumber = contact.phonenumber, 
                                          dateofbirth=contact.dateofbirth)
-
-
-"""
-remove contact with the specified id
-"""
 
 
 @router.delete("/{contact_id}", response_model=ResponseContactModel)

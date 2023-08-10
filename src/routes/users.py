@@ -14,9 +14,6 @@ from fastapi_utils.inferring_router import InferringRouter
 
 
 user_router = InferringRouter()
-"""
-create router for the authentification
-"""
 
 # class UserDb(BaseModel):
 #   id: int
@@ -27,10 +24,17 @@ create router for the authentification
 
 @cbv(user_router)
 class User_Avatar:
+    """
+    class User_Avatar is responsible for the avatar manipulations
+
+    :param db: database session
+    """
     db: Session = Depends(Connect_db(SQLALCHEMY_DATABASE_URL_FOR_WORK))
     
     @user_router.get("/users/me/", response_model=UserDb)
     async def read_users_me(self,current_user: User = Depends(auth_service.get_current_user)):
+        """
+        """
         return UserDb(id = current_user.id,
                       username = current_user.username,
                       email = current_user.email,
@@ -40,6 +44,8 @@ class User_Avatar:
 
     @user_router.patch('/users/avatar', response_model=UserDb)
     async def update_avatar_user(self,file: UploadFile = File(), current_user: User = Depends(auth_service.get_current_user)):
+        """
+        """
         cloudinary.config(
         cloud_name=settings.cloudinary_name,
         api_key=settings.cloudinary_api_key,

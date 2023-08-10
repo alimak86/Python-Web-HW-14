@@ -8,12 +8,14 @@ from sqlalchemy import and_
 
 
 class BaseContact:
-"""
-clas BaseContact is a base class for the rest of the contact classes. It is common part
+  """
+  class BaseContact is a base class for the rest of the contact classes. It is a common part of all derived classes
 
-: db : Session
-: user : User
-"""
+  :param db: database for the connection
+  :param user: authorized user
+  :type db: Session
+  :type user: User
+  """
   def __init__(self, db: Session, user: User):
     self.db = db
     self.user = user
@@ -24,13 +26,6 @@ clas BaseContact is a base class for the rest of the contact classes. It is comm
 
 
 class Get_Contacts(BaseContact):
-"""
-class Get_Contacts is responsible for the acquiring of the list of contacts
-
-: skip : int
-: limit : int
-: __call__() -> List[Contact]
-"""
   def __init__(self, skip:int, limit:int, db: Session, user: User):
     super().__init__(db, user)
     self.skip = skip
@@ -43,14 +38,6 @@ class Get_Contacts is responsible for the acquiring of the list of contacts
 
 
 class Create_Contact(BaseContact):
-"""
-class Create_Contact is responsible to create a Contact
-
-: body : body request
-: db : Session
-: user : User
-: __call__() - > Contact
-"""
   def __init__(self, body, db, user):
     super().__init__(db, user)
     self.body = body
@@ -71,14 +58,6 @@ class Create_Contact is responsible to create a Contact
 
 
 class Get_Contact(BaseContact):
-"""
-class Get_Contact is responsible to get a Contact
-
-: db : Session
-: contac_id : int
-: user : User
-: __call__() -> Contact
-"""
   def __init__(self, contact_id, db, user):
     super().__init__(db, user)
     self.contact_id = contact_id
@@ -90,13 +69,6 @@ class Get_Contact is responsible to get a Contact
 
 
 class Get_Contact_by_Name(BaseContact):
-"""
-class Get_Contatc_by_Name is responsible to get a contatc by name
-
-: contact_name : str
-: db : Session
-: user : User
-"""
   def __init__(self, contact_name: str, db: Session, user: User):
     super().__init__(db, user)
     self.contact_name = contact_name
@@ -108,14 +80,6 @@ class Get_Contatc_by_Name is responsible to get a contatc by name
 
 
 class Get_Contact_by_Second_Name(BaseContact):
-"""
-class Get_Contatc_by_Second_Name is responsible to get a contatc by second name
-
-: contact_name : str
-: db : Session
-: user : User
-"""
-
   def __init__(self, contact_name: str, db: Session, user: User):
     super().__init__(db, user)
     self.contact_name = contact_name
@@ -127,14 +91,6 @@ class Get_Contatc_by_Second_Name is responsible to get a contatc by second name
 
 
 class Get_Contact_by_Email(BaseContact):
-"""
-class Get_Contatc_by_Email is responsible to get a contatc by email
-
-: email : str
-: db : Session
-: user : User
-"""
-
   def __init__(self, email: str, db: Session, user: User):
     super().__init__(db, user)
     self.email = email
@@ -146,14 +102,6 @@ class Get_Contatc_by_Email is responsible to get a contatc by email
 
 
 class Update_Contact(BaseContact):
-"""
-class Update_Contact is responsible for the contatc info updates
-
-: contact_id : int
-: body : body request
-: db :  Session
-: user : User
-"""
   def __init__(self, contact_id, body, db, user):
     super().__init__(db, user)
     self.contact_id = contact_id
@@ -175,13 +123,6 @@ class Update_Contact is responsible for the contatc info updates
 
 
 class Remove_Contact(BaseContact):
-"""
-class Remove_Contact
-
-: conact_id : int
-: db : Session
-: user : User
-"""
   def __init__(self, contact_id, db, user):
     super().__init__(db, user)
     self.contact_id = contact_id

@@ -23,6 +23,7 @@ python-multipart = "*"
 pillow = "*"
 passlib = "*"
 bcrypt = "*"
+faker = "*"
 
 [dev-packages]
 sphinx = "==6.1.3"

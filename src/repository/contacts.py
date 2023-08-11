@@ -73,7 +73,7 @@ class Get_Contact_by_Name(BaseContact):
     super().__init__(db, user)
     self.contact_name = contact_name
 
-  async def __call__(self) -> Contact:
+  async def __call__(self) -> List[Contact]:
     return self.db.query(Contact).filter(
       and_(Contact.firstname == self.contact_name,
            Contact.user_id == self.user.id)).all()
@@ -84,7 +84,7 @@ class Get_Contact_by_Second_Name(BaseContact):
     super().__init__(db, user)
     self.contact_name = contact_name
 
-  async def __call__(self) -> Contact:
+  async def __call__(self) -> List[Contact]:
     return self.db.query(Contact).filter(
       and_(Contact.secondname == self.contact_name,
            Contact.user_id == self.user.id)).all()
@@ -95,7 +95,7 @@ class Get_Contact_by_Email(BaseContact):
     super().__init__(db, user)
     self.email = email
 
-  async def __call__(self) -> Contact:
+  async def __call__(self) -> List[Contact]:
     return self.db.query(Contact).filter(
       and_(Contact.email == self.email,
            Contact.user_id == self.user.id)).all()

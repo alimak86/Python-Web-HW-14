@@ -8,7 +8,7 @@ from src.database.models import Base
 from src.database.database import Connect_db,SQLALCHEMY_DATABASE_URL_FOR_WORK
 
 
-SQLALCHEMY_DATABASE_URL_FOR_TEST = "sqlite:///./test.db"
+SQLALCHEMY_DATABASE_URL_FOR_TEST = "sqlite:///for_testing.db"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL_FOR_TEST, connect_args={"check_same_thread": False}

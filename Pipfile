@@ -26,6 +26,8 @@ bcrypt = "*"
 faker = "*"
 pytest = "*"
 httpx = "*"
+pyjwt = {version = "*", extras = ["crypto"]}
+cryptography = "*"
 
 [dev-packages]
 sphinx = "==6.1.3"

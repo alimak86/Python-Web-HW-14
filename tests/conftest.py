@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 
 from main import app
 from src.database.models import Base
-from src.database.database import Connect_db,SQLALCHEMY_DATABASE_URL_FOR_WORK
+from src.database.database import Connect_db,SQLALCHEMY_DATABASE_URL_FOR_WORK, Connect_db_sqlite
 
 
 SQLALCHEMY_DATABASE_URL_FOR_TEST = "sqlite:///for_testing.db"
@@ -19,7 +19,6 @@ TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engin
 @pytest.fixture(scope="module")
 def session():
     # Create the database
-
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
     db = TestingSessionLocal()
@@ -39,11 +38,10 @@ def client(session):
         finally:
             session.close()
 
-    app.dependency_overrides[Connect_db(SQLALCHEMY_DATABASE_URL_FOR_WORK)] = override_get_db
+#    app.dependency_overrides[Connect_db(SQLALCHEMY_DATABASE_URL_FOR_WORK)] = override_get_db
 
     yield TestClient(app)
 
-
 @pytest.fixture(scope="module")
 def user():
-    return {"username": "deadpool", "email": "deadpool@example.com", "password": "123456789"}
+    return {"username": "deadpool2", "email": "deadpool2@example.com", "password": "p123456789"}

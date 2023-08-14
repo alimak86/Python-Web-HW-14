@@ -40,6 +40,8 @@ class Login:
     """
     execute = repository_users.Get_User_by_Email(body.email, self.db)
     exist_user = await execute()
+    # print(exist_user.username)    
+    # print(exist_user.email)
     if exist_user:
       raise HTTPException(status_code=status.HTTP_409_CONFLICT,
                           detail="Account already exists")
